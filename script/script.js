@@ -52,10 +52,11 @@ let appData = {
     }
     let allInput = document.querySelectorAll('.data input[type = text]');
     allInput.forEach(function (item) {
-      item.setAttribute('disabled', 'disabled');
+      item.setAttribute('disabled', 'true');
     });
-    incomePlus.setAttribute('disabled', 'disabled');
-    expensesPlus.setAttribute('disabled', 'disabled');
+    incomePlus.setAttribute('disabled', 'true');
+    
+    expensesPlus.setAttribute('disabled', 'true');
     start.style.display = 'none';
     cancel.style.display = 'block';
     
@@ -100,21 +101,21 @@ let appData = {
   },
 
   getExpenses: function () {
-    expensesItems.forEach(function (item) {
+    expensesItems.forEach (item => {
       let itemExpenses = item.querySelector('.expenses-title').value;
       let cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== '') {
-        appData.expenses[itemExpenses] = cashExpenses;
+        this.expenses[itemExpenses] = cashExpenses;
       }
     });
   },
 
   getIncome: function () {
-    incomItems.forEach(function (item) {
+    incomItems.forEach (item => {
       let itemIncom = item.querySelector('.income-title').value;
       let cashIncom = item.querySelector('.income-amount').value;
       if (itemIncom !== '' && cashIncom !== '') {
-        appData.income[itemIncom] = cashIncom;
+        this.income[itemIncom] = cashIncom;
       }
     });
     for (let key in this.income) {
@@ -125,19 +126,19 @@ let appData = {
 
   getAddExpenses: function () {
     let addExpenses = additionalExpensesItem.value.split(', ');
-    addExpenses.forEach(function (item) {
+    addExpenses.forEach (item => {
       item = item.trim();
       if (item !== '') {
-        appData.addExpenses.push(item);
+        this.addExpenses.push(item);
       }
     });
   },
 
   getAddIncom: function () {
-    additionalIncomeItem.forEach(function (item) {
+    additionalIncomeItem.forEach (item => {
       let itemValue = item.value.trim();
       if (itemValue !== '') {
-        appData.addIncome.push(itemValue);
+        this.addIncome.push(itemValue);
       }
     });
   },
@@ -216,6 +217,21 @@ let appData = {
       expensesPlus.style.display = 'block';
       
     }
+       this.income = {};
+      this.addIncome = [];
+      this.expenses= {};
+      this.addExpenses= [];
+      this.deposit= false;
+      this.incomeMonth= 0;
+      this.persentDeposit= 0;
+      this.moneyDeposit= 0;
+      this.budget= 0;
+      this.budgetDay= 0;
+      this.budgetMonth= 0;
+      this.expensesMonth = 0;
+
+     
+
     cancel.style.display = 'none';
     start.style.display = 'block';
     incomePlus.removeAttribute('disabled');
