@@ -15,3 +15,11 @@ h1 {
 p {
   font-size: 30px;
 }
+
+.man {
+  width: 500px !important;
+  height: 400px !important;
+  padding-top: 20px;
+  font-size: 140%;
+  font-weight: bold;
+}
