@@ -13,9 +13,10 @@ let start = document.getElementById('start'),
   periodSelect = document.querySelector('.period-select'),
   salaryAmount = document.querySelector('.salary-amount'),
   incomeTitle = document.querySelector('.income-title'),
-  incomItems = document.querySelectorAll('.income-items'),
+
+  incomItems = document.getElementsByClassName('income-items'),
   expensesTitle = document.querySelector('.expenses-title'),
-  expensesItems = document.querySelectorAll('.expenses-items'),
+  expensesItems = document.getElementsByClassName('expenses-items'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   additionalExpensesValue = document.querySelector('.additional_expenses-value'),
   additionalIncomeValue = document.querySelector('.additional_income-value'),
@@ -90,21 +91,27 @@ AppData.prototype.showResult = () => {
   });
 };
 
-AppData.prototype.addExpensesBlock = () => {
+/* AppData.prototype.addExpensesBlock = () => {
   let clonExpensesItem = expensesItems[0].cloneNode(true);
+  clonExpensesItem.querySelectorAll('input').forEach(function (item) {
+    item.value = '';
+    });
   expensesItems[0].parentNode.insertBefore(clonExpensesItem, expensesPlus);
   expensesItems = document.querySelectorAll('.expenses-items');
   if (expensesItems.length === 3) {
     expensesPlus.style.display = 'none';
   }
-};
+}; */
 
-AppData.prototype.addIncomeBlock = () => {
-  let clonIncomItem = incomItems[0].cloneNode(1);
-  incomItems[0].parentNode.insertBefore(clonIncomItem, incomePlus);
-  incomItems = document.querySelectorAll('.income-items');
-  if (incomItems.length === 3) {
-    incomePlus.style.display = 'none';
+AppData.prototype.addBlock = (items, btnPlus) => {
+  let cloneItem = items[0].cloneNode(1);
+  cloneItem.querySelectorAll('input').forEach(item => {
+    item.value = '';
+  });
+  items[0].parentNode.insertBefore(cloneItem, btnPlus);
+  items = items;
+  if (items.length === 3) {
+    btnPlus.style.display = 'none';
   }
 };
 
@@ -204,11 +211,16 @@ AppData.prototype.reset = () => {
   resultInputAll.forEach(function (elem) {
     elem.value = '';
   });
-  for (let i = 1; i < incomItems.length; i++) {
+  for (let i = 0; i < incomItems.length; i++) {
     incomItems[i].parentNode.removeChild(incomItems[i]);
     incomePlus.style.display = 'block';
   }
-  for (let i = 1; i < expensesItems.length; i++) {
+  while (incomItems.length !== 1) {
+    incomItems[incomItems.length].parentNode.removeChild(incomItems[incomItems.length]);
+    incomePlus.style.display = 'block';
+  }
+
+  for (let i = 0; i < expensesItems.length; i++) {
     expensesItems[i].parentNode.removeChild(expensesItems[i]);
     expensesPlus.style.display = 'block';
   }
@@ -238,8 +250,12 @@ AppData.prototype.reset = () => {
 AppData.prototype.eventsListeners = function () {
   // Навешиваем событие
   start.addEventListener('click', this.start.bind(appData));
-  expensesPlus.addEventListener('click', this.addExpensesBlock);
-  incomePlus.addEventListener('click', this.addIncomeBlock);
+  expensesPlus.addEventListener('click', () => {
+    this.addBlock(expensesItems, expensesPlus);
+  });
+  incomePlus.addEventListener('click', () => {
+    this.addBlock(incomItems, incomePlus);
+  });
   salaryAmount.addEventListener('keyup', this.check);
   //periodSelect.addEventListener('change', this.titleRange);    это вызов первого метода
   cancel.addEventListener('click', this.reset.bind(appData));
