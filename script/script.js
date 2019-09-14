@@ -13,18 +13,15 @@ let start = document.getElementById('start'),
   periodSelect = document.querySelector('.period-select'),
   salaryAmount = document.querySelector('.salary-amount'),
   incomeTitle = document.querySelector('.income-title'),
-
   incomItems = document.getElementsByClassName('income-items'),
   expensesTitle = document.querySelector('.expenses-title'),
   expensesItems = document.getElementsByClassName('expenses-items'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   additionalExpensesValue = document.querySelector('.additional_expenses-value'),
   additionalIncomeValue = document.querySelector('.additional_income-value'),
-
   depositBank = document.querySelector('.deposit-bank'),
   depositAmount = document.querySelector('.deposit-amount'),
   depositPercent = document.querySelector('.deposit-percent'),
-
   targetAmount = document.querySelector('.target-amount'),
   targetMonthValue = document.querySelector('.target_month-value'),
   incomePeriodValue = document.querySelector('.income_period-value'),
@@ -87,21 +84,8 @@ AppData.prototype.showResult = () => {
   targetMonthValue.value = Math.ceil(this.getTargetMonth());
   periodSelect.addEventListener('change', function () {
     incomePeriodValue.value = _this.calcSavedMoney();
-    /* console.log(this); */
   });
 };
-
-/* AppData.prototype.addExpensesBlock = () => {
-  let clonExpensesItem = expensesItems[0].cloneNode(true);
-  clonExpensesItem.querySelectorAll('input').forEach(function (item) {
-    item.value = '';
-    });
-  expensesItems[0].parentNode.insertBefore(clonExpensesItem, expensesPlus);
-  expensesItems = document.querySelectorAll('.expenses-items');
-  if (expensesItems.length === 3) {
-    expensesPlus.style.display = 'none';
-  }
-}; */
 
 AppData.prototype.addBlock = (items, btnPlus) => {
   let cloneItem = items[0].cloneNode(1);
@@ -289,7 +273,6 @@ AppData.prototype.eventsListeners = function () {
   });
 };
 
-
 const appData = new AppData();
 console.log(appData);
 appData.eventsListeners();
@@ -298,17 +281,6 @@ appData.eventsListeners();
 
 
 
-// Функцмя проверки входных данных
-function ValidInput(messenge, defaultValue, isNumb) {
-  let inputValue = prompt(messenge, defaultValue);
-  if (isNumb && +inputValue) {
-    return inputValue.trim();
-  } else if (!isNumb && inputValue !== null && inputValue !== ' ' && isNaN(inputValue)) {
-    return inputValue.trim();
-  } else {
-    return ValidInput(messenge, defaultValue, isNumb);
-  }
-}
 
 
 
@@ -319,57 +291,3 @@ function ValidInput(messenge, defaultValue, isNumb) {
 
 
 
-
-
-
-
-
-// Это пока оставил, может еще пригодиться
-
-//Период достижения цели
-/* getTargetMonth: function () {
-  let accumulatedMonth = this.mission / this.budgetMonth;
-  if (accumulatedMonth <= 0) {
-    return (' Цель никогда не будет достигнута! ');
-  } else {
-    return (' Цель будет достигнута');
-  }
-}, */
-/* asking: function () {
-  if (confirm('Усть ли у вас дополнительный заработок?')) {
-    let itemIncom = ValidInput(' Какой у вас дополнительный заработок? ', ' Фриланс ');
-    let cashIncom = ValidInput(' Сколько в месяц вы на этом зарабатываете? ', 8000, true);
-    this.income[itemIncom] = cashIncom;
-  }
-
-  let addExpenses = ValidInput('Перечислете возможные расходы за рaссчитываемый период через запятую', ' Кредит');
-  this.addExpenses = addExpenses.split(',').map(function (item) {
-    return item.trim();
-  });
-
-  this.deposit = confirm('Есть ли у вас депозит в банке?');
-
-}, */
-
-
-/* console.log('Pасходы за месяц: ' + this.expensesMonth); */
-
-/* if (this.getTargetMonth() > 0) {
-  console.log('Цель будет достигнута за: ' + Math.ceil(this.getTargetMonth()) + ' месяца(ев)');
-} else {
-  console.log(' Цель не будет достигнута');
-}
-console.log(this.getStatusIncome());
-
-for (let key in this) {
-  console.log(' Наша программа включает в себя данные: ' + key + '-' + this[key]);
-} */
-
-/* console.log(this.addExpenses.map(function (item) {
-  return item[0].toUpperCase() + item.slice(1);
-}).join(', ')); */
-
-// Число под полоской (range) первый вариант
-/* titleRange: function (avd) {
-  periodAmount.innerHTML = avd.target.value;
-}, */
