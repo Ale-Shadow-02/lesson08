@@ -1,5 +1,5 @@
 'use strict';
-let start = document.getElementById('start'),
+const start = document.getElementById('start'),
   cancel = document.getElementById('cancel'),
   plus = document.getElementsByTagName('button'),
   incomePlus = plus[0],
@@ -11,36 +11,36 @@ let start = document.getElementById('start'),
   expensesMonthValue = document.querySelector('.expenses_month-value'),
   periodSelect = document.querySelector('.period-select'),
   salaryAmount = document.querySelector('.salary-amount'),
-  incomeTitle = document.querySelector('.income-title'),
   incomItems = document.getElementsByClassName('income-items'),
   expensesTitle = document.querySelector('.expenses-title'),
   expensesItems = document.getElementsByClassName('expenses-items'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   additionalExpensesValue = document.querySelector('.additional_expenses-value'),
   additionalIncomeValue = document.querySelector('.additional_income-value'),
-  depositBank = document.querySelector('.deposit-bank'),
-  depositAmount = document.querySelector('.deposit-amount'),
-  depositPercent = document.querySelector('.deposit-percent'),
   targetAmount = document.querySelector('.target-amount'),
   targetMonthValue = document.querySelector('.target_month-value'),
   incomePeriodValue = document.querySelector('.income_period-value'),
   periodAmount = document.querySelector('.period-amount'),
-  checkBox = document.getElementById('deposit-check');
+  checkBox = document.getElementById('deposit-check'),
+  depositBank = document.querySelector('.deposit-bank'),
+  depositAmount = document.querySelector('.deposit-amount'),
+  depositPercent = document.querySelector('.deposit-percent'),
+  incomeTitle = document.querySelector('.income-title');
 
 class AppData {
-  constructor() {
+  constructor(deposit, incomeMonth, persentDeposit, moneyDeposit, budget, budgetDay, budgetMonth, expensesMonth) {
     this.income = {};
     this.addIncome = [];
     this.expenses = {};
     this.addExpenses = [];
-    this.deposit = false;
-    this.incomeMonth = 0;
-    this.persentDeposit = 0;
-    this.moneyDeposit = 0;
-    this.budget = 0;
-    this.budgetDay = 0;
-    this.budgetMonth = 0;
-    this.expensesMonth = 0;
+    this.deposit = deposit;
+    this.incomeMonth = incomeMonth;
+    this.persentDeposit = persentDeposit;
+    this.moneyDeposit = moneyDeposit;
+    this.budget = budget;
+    this.budgetDay = budgetDay;
+    this.budgetMonth = budgetMonth;
+    this.expensesMonth = expensesMonth;
   }
 
 
@@ -240,7 +240,7 @@ class AppData {
       periodAmount.innerHTML = periodSelect.value;
     });
 
-    depositCheck.addEventListener('change', function () {
+    depositCheck.addEventListener('change', () => {
       if (depositCheck.checked) {
         depositBank.style.display = 'inline-block';
         depositAmount.style.display = 'inline-block';
@@ -265,6 +265,6 @@ class AppData {
   }
 }
 
-const appData = new AppData();
+const appData = new AppData(false, 0, 0, 0, 0, 0, 0, 0);
 console.log(appData);
 appData.eventsListeners();
