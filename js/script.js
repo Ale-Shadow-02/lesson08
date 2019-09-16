@@ -1,16 +1,26 @@
 'use strict';
 
-class carWash {
-  constructor (){
-    this.brand = '0';
-    this.model = '0';
-    this.washed = false;
+class Car {
+  constructor({
+    brand = 'mazda',
+    model = 3,
+    options = []
+  } = {}) {
+    this.brand = brand;
+    this.model = model;
+    this.options = options;
   }
 
-  washReady(){
-    console.log('hi');
+  ride() {
+    console.log(this.model + ' ' + this.brand + 'поехала');
   }
 }
 
-const car = new carWash();
-console.log('car: ', car);
+const car1 = new Car();
+const car2 = new Car({
+  brand: 'BMW',
+  model: '6',
+  options: ['ac', 'climat control']
+});
+console.dir(car1);
+console.dir(car2);

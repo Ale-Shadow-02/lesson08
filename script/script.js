@@ -28,11 +28,11 @@ const start = document.getElementById('start'),
   incomeTitle = document.querySelector('.income-title');
 
 class AppData {
-  constructor(deposit, incomeMonth, persentDeposit, moneyDeposit, budget, budgetDay, budgetMonth, expensesMonth) {
-    this.income = {};
-    this.addIncome = [];
-    this.expenses = {};
-    this.addExpenses = [];
+  constructor({income = {}, addIncome = [], expenses = {}, addExpenses = [], deposit = false, incomeMonth = 0, persentDeposit = 0, moneyDeposit = 0, budget = 0, budgetDay = 0, budgetMonth = 0, expensesMonth = 0 } = {}) {
+    this.income = income;
+    this.addIncome = addIncome;
+    this.expenses = expenses;
+    this.addExpenses = addExpenses;
     this.deposit = deposit;
     this.incomeMonth = incomeMonth;
     this.persentDeposit = persentDeposit;
@@ -265,6 +265,6 @@ class AppData {
   }
 }
 
-const appData = new AppData(false, 0, 0, 0, 0, 0, 0, 0);
+const appData = new AppData();
 console.log(appData);
 appData.eventsListeners();
